@@ -7,10 +7,13 @@ import {
   Patch,
   Post,
   Query,
+  Req,
+  Res,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Controller('movies') // router
 export class MoviesController {
@@ -22,7 +25,9 @@ export class MoviesController {
   */
 
   @Get()
-  getAll(): Movie[] {
+  getAll(@Req() req, @Res() res): Movie[] {
+    // NestJS는 Express 위에서 돌아가기 때문에, Express의 Request / Response 객체에 접근할 수 있다. 하지만, NestJS는 동시에 Fastify라는 프레임워크 위에서 돌아가기도한다.
+    // 그래서 둘 중 특정 프레임워크에서만 사용하는 객체들은 사용을 자제하고 NestJS가 제공하는 방식을 사용한다면, Express와 Fastify 사이를 자유롭게 넘나들며 쉽게 전환할 수 있다.
     return this.movieService.getAll();
   }
 
@@ -48,7 +53,7 @@ export class MoviesController {
   }
 
   @Patch('/:id')
-  patch(@Param('id') movieId: number, @Body() updateData) {
+  patch(@Param('id') movieId: number, @Body() updateData: UpdateMovieDto) {
     return this.movieService.update(movieId, updateData);
   }
 }

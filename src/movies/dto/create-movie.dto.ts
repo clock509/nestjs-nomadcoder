@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateMovieDto {
   // DTO: Data Transfor Object - 데이터 유효성 검증
@@ -10,6 +10,7 @@ export class CreateMovieDto {
   @IsNumber()
   readonly year: number;
 
+  @IsOptional() // 해당 데이터의 필수값 여부를 선택으로 설정.
   @IsString({ each: true }) // each: 요소 하나하나를 모두 검사한다.
   readonly genres: string[];
 }

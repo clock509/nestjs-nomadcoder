@@ -70,6 +70,12 @@ $ nest generate service
 ? What name would you like to use for the service? movies   ## Type service name after question as you want.
 ```
 
+## Generate module
+```
+$ nest generate module
+? What name would you like to use for the module? movies   ## Type module name after question as you want.
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
